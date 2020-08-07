@@ -5,6 +5,7 @@ import 'package:our_app/projects/page/base_ball_page.dart';
 import 'package:our_app/projects/page/bezier_page.dart';
 import 'package:our_app/projects/page/card_page.dart';
 import 'package:our_app/projects/page/login_page.dart';
+import 'package:our_app/projects/page/pageview_page.dart';
 import 'package:our_app/projects/page/provider_page/counter_notifier.dart';
 import 'package:our_app/projects/page/provider_page/counter_page.dart';
 import 'package:our_app/projects/page/shimmer_page.dart';
@@ -21,6 +22,7 @@ class RouterCenter {
   static const router_animation_page = "/animationPage";
   static const router_counter_page = "/counterPage";
   static const router_calculator_page = "/calculatorPage";
+  static const router_pageview_page = "/pageViewPage";
 
   static final Map routers = <String, WidgetBuilder>{
     RouterCenter.router_login_page: (BuildContext context) => new LoginPage(),
@@ -36,6 +38,7 @@ class RouterCenter {
         new CounterPage(),
     RouterCenter.router_calculator_page: (BuildContext context) =>
         new CalaulatorPage(),
+    RouterCenter.router_pageview_page: (BuildContext context) => PageViewPage(),
   };
 }
 
@@ -87,6 +90,7 @@ class HomePage extends StatelessWidget {
     "animationPage": RouterCenter.router_animation_page,
     "counterPage": RouterCenter.router_counter_page,
     "calculatorPage": RouterCenter.router_calculator_page,
+    "pageViewPage": RouterCenter.router_pageview_page,
   };
   HomePage() {
     listDataMap.forEach((k, v) {
