@@ -1,6 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-/// PageView实现滚动，ShaderMask实现渐变色
+/// PageView实现滚动，ShaderMask实现渐变色，Dialog弹窗
 class PageViewPage extends StatelessWidget {
   final bgColors = [Colors.orange, Colors.pink, Colors.blue];
   final strings = ["这是第一页", "这是第二页", "这是第三页"];
@@ -27,11 +28,64 @@ class PageViewPage extends StatelessWidget {
               itemCount: 3,
               itemBuilder: (context, index) {
                 return PageItem(
-                    index: index,
-                    bgColor: bgColors[index],
-                    text: strings[index]);
+                  index: index,
+                  bgColor: bgColors[index],
+                  text: strings[index],
+                  onTap: () {
+                    showTipsDialog(context, strings[index],
+                        isIos: index % 2 == 0);
+                  },
+                );
               }),
         ));
+  }
+
+  /// 展示Dialog弹窗
+  void showTipsDialog(BuildContext context, String content,
+      {bool isIos = false}) {
+    if (isIos) {
+      showCupertinoDialog(
+          context: context,
+          builder: (context) {
+            return CupertinoAlertDialog(
+              title: Text('这是title'),
+              content: Text(content),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop('cancel');
+                    },
+                    child: Text('取消')),
+                FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop('ok');
+                    },
+                    child: Text('确定'))
+              ],
+            );
+          });
+    } else {
+      showDialog(
+          context: context,
+          builder: (context) {
+            return AlertDialog(
+              title: Text('这是title'),
+              content: Text(content),
+              actions: [
+                FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop('cancel');
+                    },
+                    child: Text('取消')),
+                FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop('ok');
+                    },
+                    child: Text('确定'))
+              ],
+            );
+          });
+    }
   }
 }
 
@@ -40,22 +94,28 @@ class PageItem extends StatelessWidget {
   final Color bgColor;
   final int index;
   final String text;
+  final GestureTapCallback onTap;
 
   const PageItem({
     Key key,
     @required this.index,
     @required this.bgColor,
     @required this.text,
+    this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(left: 8, right: 8, top: 30),
-      alignment: Alignment.center,
-      decoration: BoxDecoration(
-          color: bgColor, borderRadius: BorderRadius.all(Radius.circular(8.0))),
-      child: ShaderMaskText(text: text),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+        margin: EdgeInsets.only(left: 8, right: 8, top: 30),
+        alignment: Alignment.center,
+        decoration: BoxDecoration(
+            color: bgColor,
+            borderRadius: BorderRadius.all(Radius.circular(8.0))),
+        child: ShaderMaskText(text: text),
+      ),
     );
   }
 }
