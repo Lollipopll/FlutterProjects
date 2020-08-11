@@ -12,11 +12,21 @@ class PageViewPage extends StatelessWidget {
         appBar: AppBar(
           title: Text("PageView"),
         ),
-        body: Column(
+        body: SingleChildScrollView(
+            child: Column(
+          // crossAxisAlignment:CrossAxisAlignment.start ,
           children: [
             pageWidget(),
+            SizedBox(
+              height: 20,
+            ),
+            stackWidget(),
+            SizedBox(
+              height: 120,
+            ),
+            IndexedStackWidget(),
           ],
-        ));
+        )));
   }
 
   Widget pageWidget() {
@@ -44,6 +54,121 @@ class PageViewPage extends StatelessWidget {
               },
             );
           }),
+    );
+  }
+
+  Widget stackWidget() {
+    return Stack(
+      overflow: Overflow.visible, // visible子控件超出部分总是显示，默认是裁剪
+      alignment: Alignment.center,
+      children: [
+        Container(
+          height: 100,
+          width: 100,
+          color: Colors.pink,
+        ),
+        Container(
+          height: 75,
+          width: 75,
+          color: Colors.yellow,
+        ),
+        Container(
+          height: 50,
+          width: 50,
+          color: Colors.blue,
+        ),
+        Positioned(
+            left: 75,
+            top: 75,
+            height: 100,
+            width: 100,
+            child: Container(
+              color: Colors.green,
+              alignment: Alignment.center,
+              child: Text(
+                'Positioned控件',
+                style: TextStyle(fontSize: 12),
+              ),
+            )),
+        Text('测试Stack'),
+      ],
+    );
+  }
+}
+
+class IndexedStackWidget extends StatefulWidget {
+  IndexedStackWidget({Key key}) : super(key: key);
+
+  @override
+  _IndexedStackWidgetState createState() => _IndexedStackWidgetState();
+}
+
+class _IndexedStackWidgetState extends State<IndexedStackWidget> {
+  var _index = 0;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      child: Column(
+        children: [
+          Text('测试IndexedStack'),
+          IndexedStack(
+            index: _index,
+            children: [
+              Center(
+                child: Container(
+                  height: 100,
+                  width: 100,
+                  color: Colors.green,
+                ),
+              ),
+              Center(
+                child: Container(
+                  height: 120,
+                  width: 120,
+                  color: Colors.blue,
+                ),
+              ),
+              Center(
+                child: Container(
+                  height: 130,
+                  width: 130,
+                  color: Colors.purple,
+                ),
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: Icon(Icons.access_alarm),
+                onPressed: () {
+                  setState(() {
+                    _index = 0;
+                  });
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.access_time),
+                onPressed: () {
+                  setState(() {
+                    _index = 1;
+                  });
+                },
+              ),
+              IconButton(
+                icon: Icon(Icons.account_balance),
+                onPressed: () {
+                  setState(() {
+                    _index = 2;
+                  });
+                },
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 }
