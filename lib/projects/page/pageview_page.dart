@@ -8,25 +8,28 @@ class PageViewPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text("PageView"),
-        ),
-        body: SingleChildScrollView(
-            child: Column(
-          // crossAxisAlignment:CrossAxisAlignment.start ,
-          children: [
-            pageWidget(),
-            SizedBox(
-              height: 20,
-            ),
-            stackWidget(),
-            SizedBox(
-              height: 120,
-            ),
-            IndexedStackWidget(),
-          ],
-        )));
+    return ColorFiltered(
+      colorFilter: ColorFilter.mode(Colors.grey, BlendMode.color),
+          child: Scaffold(
+          appBar: AppBar(
+            title: Text("PageView"),
+          ),
+          body: SingleChildScrollView(
+              child: Column(
+            // crossAxisAlignment:CrossAxisAlignment.start ,
+            children: [
+              pageWidget(),
+              SizedBox(
+                height: 20,
+              ),
+              stackWidget(),
+              SizedBox(
+                height: 120,
+              ),
+              IndexedStackWidget(),
+            ],
+          ))),
+    );
   }
 
   Widget pageWidget() {

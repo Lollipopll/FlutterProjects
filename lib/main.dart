@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:our_app/projects/calculator/calculator_page.dart';
-import 'package:our_app/projects/page/animation_page.dart';
+import 'package:our_app/projects/animation_widget/animation_page.dart';
 import 'package:our_app/projects/page/base_ball_page.dart';
 import 'package:our_app/projects/page/bezier_page.dart';
 import 'package:our_app/projects/page/card_page.dart';
