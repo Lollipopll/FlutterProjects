@@ -78,6 +78,8 @@ class MyMaterialApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       home: HomePage(),
+      showPerformanceOverlay: false,//性能检测开关
+      debugShowCheckedModeBanner: true,//右上角debug标签的显示
     );
   }
 }

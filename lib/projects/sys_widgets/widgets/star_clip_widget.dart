@@ -32,7 +32,7 @@ class _StarClipWidgetState extends State<StarClipWidget>
 
   @override
   void dispose() {
-    _controller.stop();
+    _controller.dispose();
     super.dispose();
   }
 
