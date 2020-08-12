@@ -15,7 +15,10 @@ class _DraggableWidgetState extends State<DraggableWidget> {
     return Center(
       child: Column(
         children: <Widget>[
-          TitleView("DraggableWidget"),
+          TitleView(
+            "DraggableWidget",
+            isTopMargin: false,
+          ),
           _buildDraggable(),
           SizedBox(
             height: 30,
@@ -38,7 +41,9 @@ class _DraggableWidgetState extends State<DraggableWidget> {
                         color: Colors.red,
                         borderRadius: BorderRadius.circular(10),
                       ),
-                      child: Text('data'),
+                      child: Text(
+                        'data',
+                      ),
                     );
             },
             // 拖拽结束后是否接受，true-触发onAccept false-触发onLeave
